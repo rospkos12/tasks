@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en-UK">
+<head>
+<title>Registration Page</title>
+
+
+</head>
+<body>
+
+<h1> Registration Form </h1>
+<br/>
+
+<form id="reg_form" name ="reg_form" action="registration_form_page.html" onsubmit="return false;" method="get">
+<table border="0" width="50%"> <col width="40" /> <col width="50" />
+<tr>
+<td>Name:</td><td> <input type="text" id="name" name="name" /></td> 
+</tr>
+
+<tr>
+<td>Email: </td><td><input type="text" id="email" name="email" /><br />
+</tr>
+
+<tr>
+<td>Phone Number:</td><td> <input type="text" name="phone" /><br />
+</tr>
+
+<tr>
+<td>Address: </td><td><input type="text" name="addressline1" /><br />
+</tr>
+<tr>
+<td></td><td><input type="text" name="addressline2" /><br />
+</tr>
+<tr>
+<td></td><td><input type="text" name="addressline3" /><br />
+</tr>
+
+<tr>
+<td> Food Preference </td>
+</tr>
+<tr>
+<td><input type="radio" name="food_prefer" value="veg" /> Veg</td>
+</tr>
+<tr>
+<td><input type="radio" name="food_prefer" value="nonveg" /> Non-Veg <br/></td>
+</tr>
+<tr>
+
+<td>Membership</td>
+</tr>
+<tr>
+<td><input type="radio" name="membership" value="member" />Member</td>
+</tr>
+<tr>
+<td><input type="radio" name="membership" value="non-member" />Non-Member</td>
+<br/>
+</table>
+<input type="submit" value="Submit" onclick="calculate_total('reg_form')"/> 
+</form>
+
+Registration Total : <input type="text" id="reg_total" name="reg_total" />
+<script type="text/javascript">
+function verifyForm(form){
+
+
+    var name = document.forms[form].elements['name'].value;
+    if(name == "") 
+    { 
+        alert('You have not entered name') 
+        form.name.focus(); 
+        return false; 
+    } 
+
+    var address = document.forms[form].elements['email'].value;
+    if(address == "") 
+    { 
+        alert('You have not entered an email id') 
+        form.email.focus(); 
+        return false; 
+    } 
+    else
+    {
+        var status = false;     
+        var emailRegEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+        if (address.search(emailRegEx) == -1) {
+            alert("Please enter a valid email address.");
+        }
+        else {
+          status = true;
+        }
+        return status;
+    }
+}
+
+function calculate_total(form)
+{
+    
+    if( verifyForm(form) ){
+    
+        var x=document.forms["reg_form"];
+        var total = 0;
+        
+        if(x.food_prefer[0].checked)    
+            total += 60;
+        else if(x.food_prefer[1].checked)
+            total += 100;
+        else
+            alert("Please enter the Food Preference")
+        
+        if(x.membership[0].checked)    
+            total += 300;
+        else if(x.membership[1].checked)
+            total += 400;   
+        else
+            alert("Please enter the Membership")
+        
+        
+        var txtBox = document.getElementById("reg_total");
+        txtBox.value = total;
+}
+    
+}
+
+
+</script>
+
+</body>
+</html>
